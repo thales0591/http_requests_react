@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Camisa",
+      "price": 59.9
+    },
+    {
+      "id": "2",
+      "name": "Calça vermelha",
+      "price": 90
+    },
+    {
+      "id": "3",
+      "name": "Boné aba reta",
+      "price": 29.9
+    },
+    {
+      "id": "8de8",
+      "name": "dsdas",
+      "price": "2131"
+    },
+    {
+      "id": "4340",
+      "name": "eai mano",
+      "price": "232"
+    },
+    {
+      "id": "9380",
+      "name": "qw",
+      "price": "32"
+    },
+    {
+      "id": "dc58",
+      "name": "eaiipaiii",
+      "price": "4234"
+    }
+  ]
+}
