@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import { useFetch } from "./hooks/useFetch";
-import { useDelete } from "./hooks/useDelete";
 
 function App() {
   const url = "http://localhost:3000/products";
 
-  const { data: items, httpConfig, loading, error } = useFetch(url)
-  
+  const { data: items, httpConfig, loading, error, setData } = useFetch(url);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -25,12 +23,12 @@ function App() {
   // }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const product = {
       name: name,
-      price: price
-    }
+      price: price,
+    };
 
     // const res = await fetch(url, {
     //   method: "POST",
@@ -44,23 +42,27 @@ function App() {
 
     // setProducts((prevProducts) => [...prevProducts, addedProduct])
 
-    httpConfig(product, "POST")
+    httpConfig(product, "POST");
 
-    setName("")
-    setPrice("")
+    setName("");
+    setPrice("");
   };
 
   const HandleDelete = async (id, item) => {
-    const urlMod = `${url}/${id}`
+    const urlMod = `${url}/${id}`;
 
     await fetch(urlMod, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(item)
-    })
-  }
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    });
+
+    const res = await fetch(url);
+    const json = await res.json();
+    setData(json);
+  };
 
   return (
     <>
@@ -68,16 +70,19 @@ function App() {
         <h1>Lista de produtos</h1>
         {loading && <p>Carregando dados...</p>}
         {error && <p>{error}</p>}
-        {!error && (<ul>
-          {items && items.map((item) => (
-            <>
-            <li key={item.id}>
-              {item.name} - R$: {item.price}
-            </li>
-            {item && <button onClick={() => HandleDelete(item.id, item)}>Deletar item</button>}
-            </>
-          ))}
-        </ul>)}
+        {!error && (
+          <ul>
+            {items &&
+              items.map((item) => (
+                <li key={item.id}>
+                  {item.name} - R$: {item.price}
+                  <button onClick={() => HandleDelete(item.id, item)}>
+                    Deletar item
+                  </button>
+                </li>
+              ))}
+          </ul>
+        )}
       </div>
       <div className="add-product">
         <form onSubmit={handleSubmit}>
