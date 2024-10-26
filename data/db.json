@@ -44,6 +44,16 @@
       "id": "bc65",
       "name": "opa",
       "price": "2"
+    },
+    {
+      "id": "8968",
+      "name": "eai",
+      "price": "23"
+    },
+    {
+      "id": "2c04",
+      "name": "microfone",
+      "price": "300"
     }
   ]
 }
